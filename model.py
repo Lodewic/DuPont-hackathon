@@ -2,7 +2,8 @@ from keras.models import Sequential
 from keras import preprocessing
 import sys
 import numpy as np
-from keras.layers import Dense, LSTM,Embedding,Dropout
+from keras.layers import Dense, LSTM,Embedding
+from keras.optimizers import Adam
 
 import_file = open(sys.argv[1],'r').read().strip('\n').split('\n')
 output_file = open(sys.argv[2],'r').read().strip('\n').split('\n')
@@ -16,6 +17,7 @@ def one_hot_encode(sequence,encoding):
 AA_LABELS = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S',
              'T', 'V', 'W', 'Y']
 
+
 list_input = []
 for line in import_file:
 	list_input.append(one_hot_encode(line.strip(), AA_LABELS))
@@ -27,8 +29,7 @@ model = Sequential()
 model.add(Dense(len(AA_LABELS)+1,input_shape=(n_list.shape[1],n_list.shape[2])))
 model.add(LSTM(15))
 model.add(Dense(4))
-model.add(Dropout(.1))
-model.compile(optimizer='adam',
+model.compile(optimizer=Adam(lr=.01),
               loss='mse',
               metrics=['accuracy'])
 model.fit(n_list, output_file, epochs=100, batch_size=64)
