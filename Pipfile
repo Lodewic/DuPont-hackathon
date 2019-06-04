@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+mdanalysis = "*"
+pandas = "*"
+numpy = "*"
+nglview = "*"
+jupyter = "*"
+jupyter-contrib-nbextensions = "*"
+scipy = "==1.2"
+biopython = "*"
+jinja2 = "*"
+matplotlib = "==3.0"
+plotnine = "*"
+flask = "*"
+requests = "*"
+tensorflow = "*"
+keras = "*"
+
+[requires]
+python_version = "3.7"
