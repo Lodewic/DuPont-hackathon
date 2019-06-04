@@ -129,4 +129,4 @@ def generate_variant(reference: str, model: Model, data: dict, alt_residues: lis
     mutate_at = random.choices(list(range(len(reference))), k=n_mutations)
     for pos in mutate_at:
         variant[pos] = random.choice(alt_residues)
-    return pd.Series(predict(variant, model, data, one_hot_encoding), index=list(data['y']))
+    return (variant, pd.Series(predict(variant, model, data, one_hot_encoding), index=list(data['y'])))
