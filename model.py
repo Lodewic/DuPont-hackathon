@@ -2,7 +2,7 @@ from keras.models import Sequential
 from keras import preprocessing
 import sys
 import numpy as np
-from keras.layers import Dense, LSTM,Embedding
+from keras.layers import Dense, LSTM,Embedding,Dropout
 
 import_file = open(sys.argv[1],'r').read().strip('\n').split('\n')
 output_file = open(sys.argv[2],'r').read().strip('\n').split('\n')
@@ -27,6 +27,7 @@ model = Sequential()
 model.add(Dense(len(AA_LABELS)+1,input_shape=(n_list.shape[1],n_list.shape[2])))
 model.add(LSTM(15))
 model.add(Dense(4))
+model.add(Dropout(.1))
 model.compile(optimizer='adam',
               loss='mse',
               metrics=['accuracy'])
