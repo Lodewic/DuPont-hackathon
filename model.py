@@ -5,6 +5,9 @@ import numpy as np
 from keras.layers import Dense, LSTM,Embedding
 
 import_file = open(sys.argv[1],'r').read().strip('\n').split('\n')
+output_file = open(sys.argv[2],'r').read().strip('\n').split('\n')
+
+output_file = np.array([[float(x) if x else 0 for x in line.split('\t')] for line in output_file ],'float32')
 
 def one_hot_encode(sequence,encoding):
     return [ [ 1 if x == aa else 0 for aa in encoding ] for x in sequence ]
@@ -23,9 +26,9 @@ n_list = np.array(list_input, "float32")
 model = Sequential()
 model.add(Embedding(len(AA_LABELS)+1, 100,input_length=(n_list.shape[1],n_list.shape[2])))
 model.add(LSTM(15))
-model.add(Dense(3))
+model.add(Dense(4), activation="relu")
 model.compile(optimizer='rmsprop',
               loss='mse',
               metrics=['accuracy'])
-model.fit(n_list, epochs=10, batch_size=32)
+model.fit(n_list, output_file, epochs=10, batch_size=32)
 
