@@ -11,7 +11,18 @@ As our requirements for lower resource use get more demanding, we continuously n
 
 In this hackathon, we will provide representative data for our challenge, describe the problem and discuss different approaches of how to employ techniques like deep learning to support enzyme optimization process. Join and help us design the enzymes of tomorrow! 
 
-## Installation
+# Setup conda environment
+
+Assuming you have `conda` installed, run,
+
+```bash
+conda env  create -f environment.yml
+```
+
+This will create an environment called `dupont`. When creating the environment conda must also install some packages using `pip`. I have found that in some cases these `pip` packages are ignored. If so, have a look at the `environment.yml` file and manually install the required `pip` packages into your `dupont` environment.
+
+
+## Installation (original)
 
 None of the packages used in this repository are required for participating in the hackathon but if you want to follow the examples you can do by first installing pipenv
 
