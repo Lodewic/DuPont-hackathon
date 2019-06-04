@@ -13,7 +13,6 @@ def one_hot_encode(sequence,encoding):
     return [ [ 1 if x == aa else 0 for aa in encoding ] for x in sequence ]
 
 #encode
-
 AA_LABELS = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S',
              'T', 'V', 'W', 'Y']
 
@@ -28,7 +27,7 @@ model = Sequential()
 model.add(Dense(len(AA_LABELS)+1,input_shape=(n_list.shape[1],n_list.shape[2])))
 model.add(LSTM(15))
 model.add(Dense(4))
-model.compile(optimizer='rmsprop',
+model.compile(optimizer='adam',
               loss='mse',
               metrics=['accuracy'])
-model.fit(n_list, output_file, epochs=10, batch_size=150)
+model.fit(n_list, output_file, epochs=100, batch_size=64)
