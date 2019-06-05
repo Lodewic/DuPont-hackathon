@@ -26,10 +26,11 @@ n_list = np.array(list_input, "float32")
 n_list = np.reshape(n_list,(n_list.shape[0],n_list.shape[2], n_list.shape[1]))
 
 model = Sequential()
-model.add(Dense(len(AA_LABELS)+1,input_shape=(n_list.shape[1],n_list.shape[2])))
+model.add(Dense(len(AA_LABELS)+1,input_shape=(None,n_list.shape[2])))
 model.add(LSTM(15))
 model.add(Dense(4))
 model.compile(optimizer=Adam(lr=.005),
               loss='mse',
               metrics=['accuracy'])
-model.fit(n_list, output_file, epochs=200, batch_size=64)
+model.fit(n_list, output_file, epochs=15, batch_size=64)
+
